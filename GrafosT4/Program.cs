@@ -1,6 +1,8 @@
 ﻿using System;
 using Graph;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 
 namespace Graph
 {
@@ -12,38 +14,18 @@ namespace Graph
             Console.WriteLine("Meus Grafos");
             Console.WriteLine("\r");
 
-            WelshPowell welsh = new WelshPowell();
-            //welsh.LoadFile(Environment.CurrentDirectory + "/files/r250-66-65.txt");
-            welsh.LoadFile(Environment.CurrentDirectory + "/files/r1000-234-234.txt");
-            //welsh.LoadFile(Environment.CurrentDirectory + "/files/C4000-260-X.txt");
+            Console.WriteLine("Grafo Lista");
+            Console.WriteLine("\r");
 
-            Stopwatch stopwatchWelsh = new Stopwatch();
+            GraphList graphList = new GraphList(false, true);
+            string directory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\files\\slides_modificado.txt";
+            graphList.LoadFile(directory);
+            graphList.GraphPrint();
 
-            stopwatchWelsh.Start();
-            welsh.WelshPowellColoring();
-            stopwatchWelsh.Stop();
+            Console.WriteLine("Imprimindo Busca em Profundidade (BFS): ");
 
-            long tempoDecorridoWelsh = stopwatchWelsh.ElapsedMilliseconds;
-
-            Console.WriteLine($"Tempo de execução WelshPowell: {tempoDecorridoWelsh} ms");
-            Console.WriteLine($"Quantidade de cores usadas: {welsh.colors.Count}");
-
-
-            Dsatur dsatur = new Dsatur();
-            //dsatur.LoadFile(Environment.CurrentDirectory + "/files/r250-66-65.txt");
-            dsatur.LoadFile(Environment.CurrentDirectory + "/files/r1000-234-234.txt");
-            //dsatur.LoadFile(Environment.CurrentDirectory + "/files/C4000-260-X.txt");
-
-            Stopwatch stopwatchDsatur = new Stopwatch();
-
-            stopwatchDsatur.Start();
-            dsatur.DsaturColoring();
-            stopwatchDsatur.Stop();
-
-            long tempoDecorridoDsatur = stopwatchDsatur.ElapsedMilliseconds;
-
-            Console.WriteLine($"Tempo de execução Dsatur: {tempoDecorridoDsatur} ms");
-            Console.WriteLine($"Quantidade de cores usadas: {dsatur.colors.Count}");
+            DepthFirstSearch dfs = new DepthFirstSearch(graphList);
+            dfs.StartDepth(0, 4);
         }
     }
 }
