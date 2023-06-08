@@ -14,18 +14,22 @@ namespace Graph
             Console.WriteLine("Meus Grafos");
             Console.WriteLine("\r");
 
-            Console.WriteLine("Grafo Lista");
+            Console.WriteLine("Grafo Lista Com algoritmo Ford Fukerson");
             Console.WriteLine("\r");
 
-            GraphList graphList = new GraphList(false, true);
-            string directory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\files\\slides_modificado.txt";
-            graphList.LoadFile(directory);
+            GraphList graphList = new GraphList();
+
+            graphList.LoadFile("files/slides_modificado.txt");
             graphList.GraphPrint();
 
-            Console.WriteLine("Imprimindo Busca em Profundidade (BFS): ");
+            FordFukerson fukerson = new FordFukerson(graphList);
 
-            DepthFirstSearch dfs = new DepthFirstSearch(graphList);
-            dfs.StartDepth(0, 4);
+            fukerson.CalculateFordFukerson(0, 1);
+
+            //Console.WriteLine("Imprimindo Busca em Profundidade (BFS): ");
+
+            //DepthFirstSearch dfs = new DepthFirstSearch(graphList);
+            //dfs.StartDepth(0, 4);
         }
     }
 }

@@ -71,20 +71,20 @@ namespace Graph
                     setted = true;
                     nodes = Convert.ToInt32(items[0]);
                     edges = Convert.ToInt32(items[1]);
-                    //Directed = Convert.ToBoolean(Convert.ToInt32(items[2]));
-                    //Weighted = Convert.ToBoolean(Convert.ToInt32(items[3]));
+                    Directed = Convert.ToBoolean(Convert.ToInt32(items[2]));
+                    Weighted = Convert.ToBoolean(Convert.ToInt32(items[3]));
 
                     continue;
                 }
 
                 string nodeFrom = Convert.ToString(items[0]);
                 string nodeTo = Convert.ToString(items[1]);
-                //double weight = Weighted ? Convert.ToDouble("0" + items[2].Replace(".", ",")) : 0;
+                double weight = Weighted ? Convert.ToDouble("0" + items[2].Replace(".", ",")) : 0;
 
                 if (this.NodeIndex(nodeFrom) == -1) this.NodeInsert(nodeFrom);
                 if (this.NodeIndex(nodeTo) == -1) this.NodeInsert(nodeTo);
 
-                this.EdgeInsert(this.NodeIndex(nodeFrom), this.NodeIndex(nodeTo), 0 /*weight*/);
+                this.EdgeInsert(this.NodeIndex(nodeFrom), this.NodeIndex(nodeTo), weight);
             }
             Nodes = NodeNames.Count;
             Edges = edges;
