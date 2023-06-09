@@ -13,23 +13,18 @@ namespace Graph
 
             Console.WriteLine("Meus Grafos");
             Console.WriteLine("\r");
-
-            Console.WriteLine("Grafo Lista Com algoritmo Ford Fukerson");
+            Console.WriteLine("Grafo Matriz Com algoritmo Ford Fukerson");
             Console.WriteLine("\r");
 
-            GraphList graphList = new GraphList();
+            GraphMatriz graph = new GraphMatriz();
+            graph.LoadFile("files/exemplo2.txt");
+            //graph.GraphPrint();
 
-            graphList.LoadFile("files/slides_modificado.txt");
-            graphList.GraphPrint();
+            FordFukerson fukerson = new FordFukerson(graph);
+            fukerson.CalculateFordFukerson(0, 5);
 
-            FordFukerson fukerson = new FordFukerson(graphList);
-
-            fukerson.CalculateFordFukerson(0, 1);
-
-            //Console.WriteLine("Imprimindo Busca em Profundidade (BFS): ");
-
-            //DepthFirstSearch dfs = new DepthFirstSearch(graphList);
-            //dfs.StartDepth(0, 4);
+            Console.WriteLine("O fluxo máximo possível é: " + fukerson.MaxFlow);
         }
     }
+
 }

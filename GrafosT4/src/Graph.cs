@@ -12,7 +12,7 @@ namespace Graph
     public abstract class Graph
     {
         public List<string> NodeNames;
-
+        public String filePath = "";
         public Graph(
             bool directed = false,
             bool weighted = false,
@@ -58,6 +58,7 @@ namespace Graph
         {
             if (!File.Exists(path)) throw new Exception("Arquivo não encontrado.");
 
+            filePath = path;
             bool setted = false;
             int nodes = 0;
             int edges = 0;
